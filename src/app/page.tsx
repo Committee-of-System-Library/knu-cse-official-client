@@ -1,5 +1,4 @@
 import Footer from "@/components/Footer";
-import Chat from "@/components/Chat";
 import { IconPlus } from "@tabler/icons-react";
 
 function NoticesSection() {
