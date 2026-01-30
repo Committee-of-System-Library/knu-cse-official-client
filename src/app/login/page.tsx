@@ -1,18 +1,42 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import cseLogo from "@/assets/logo.jpg";
 import { useState } from "react";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: API 연동
-    console.log("Login attempt:", { email, password });
+    try { // TODO: API 연동
+      const response = await fetch("api주소/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        alert("로그인 성공!");
+        router.push("/");
+      } else {
+        alert("이메일 또는 비밀번호가 일치하지 않습니다.");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      alert("서버 연결에 실패했습니다.");
+    }
+    //console.log("Login attempt:", { email, password });
   };
 
   return (
