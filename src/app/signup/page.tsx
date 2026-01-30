@@ -14,13 +14,39 @@ export default function SignUpPage() {
   const [studentID, setStudentID] = useState("");
   const [name, setName] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: API 연동
-    console.log("Login attempt:", { email, password });
-    alert("회원가입이 완료되었습니다!");
-    router.push("/login");
+    try {     // TODO: API 연동
+      const response = await fetch("api주소/api/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+          name: name,
+          studentID: studentID
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        alert("회원가입이 완료되었습니다!");
+        router.push("/login");
+      } else {
+        // 400번대 or 500번대 에러가 났을 때
+        alert("회원가입에 실패했습니다.");
+      }
+    } catch (error) {
+      //서버가 꺼져있거나 인터넷 연결이 안 될 때
+      console.error("연결 에러:", error);
+      alert("서버와 통신 중 에러가 발생했습니다.");
+    }
   };
+  //console.log("Login attempt:", { email, password });
+  //alert("회원가입이 완료되었습니다!");
+  //router.push("/login");
 
   return (
     <div className="min-h-screen bg-[#f8faff] flex items-center justify-center px-4">
