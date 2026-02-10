@@ -82,18 +82,18 @@ export default function NoticesPage() {
           filteredNotices.map((notice) => (
             <div
               key={notice.id}
-              className="grid grid-cols-[1fr_120px_120px] px-8 px-5 border-b border-gray-50 last:border-none hover:bg-gray-50 cursor-pointer transition-colors items-center"
+              className="grid grid-cols-[1fr_120px_150px] px-7 py-5 border-b border-gray-50 last:border-none hover:bg-gray-50 cursor-pointer transition-colors items-center"
             >
               <div className="flex items-center gap-2">
                 <span className="text-black font-medium">{notice.title}</span>
                 <IconChevronRight size={16} className="text-gray-300" />
               </div>
-              <div className="tect-center text-gray-500 text-sm">{notice.author}</div>
+              <div className="text-center text-gray-500 text-sm">{notice.author}</div>
               <div className="text-center text-gray-400 text-sm">{notice.date}</div>
             </div>
           ))
         ) : (
-          <div className="py-20 text-center text-gray-500">검색 결과가 없습니다.</div>
+          <div className="py-8 text-center text-gray-500">검색 결과가 없습니다.</div>
         )}
       </div>
 
