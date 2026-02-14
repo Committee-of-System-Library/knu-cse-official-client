@@ -1,4 +1,3 @@
-import Footer from "@/components/Footer";
 import { IconPlus } from "@tabler/icons-react";
 
 function NoticesSection() {
@@ -112,8 +111,6 @@ export default function Home() {
           <DevChatsSection />
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }
